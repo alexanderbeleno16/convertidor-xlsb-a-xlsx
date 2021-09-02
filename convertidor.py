@@ -3,7 +3,7 @@ import openpyxl
 from pyxlsb import open_workbook as open_xlsb
 from pyxlsb import convert_date
 import sys
-import os.path
+from os import system, name, path
 
 # ------ PIP ------
 # pip install pyxlsb https://pypi.org/project/pyxlsb/
@@ -89,7 +89,7 @@ def convertirReparto(nombre_excelXLSB):
     guardarArchivoNuevo(wbNew, nombre_excelXLSB)
 
 def guardarArchivoNuevo(wbNew, nombre=""):
-    nombre_guardar = os.path.basename(nombre).replace('.xlsb', '.xlsx')
+    nombre_guardar = path.basename(nombre).replace('.xlsb', '.xlsx')
     
     try:
         if(sys.argv[3]):
@@ -110,8 +110,10 @@ def guardarArchivoNuevo(wbNew, nombre=""):
         print("###############################################################")
         print("")
     except FileNotFoundError:
-        print("No se pudo acceder al directorio '{}' ".format(os.path.dirname(nombre_guardar)))
+        print("No se pudo acceder al directorio '{}' ".format(path.dirname(nombre_guardar)))
     
+def clear():
+    _ = system('cls' if name == 'nt' else 'clear')
 
 try:
     if(sys.argv[1] == ''):
