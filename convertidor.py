@@ -35,7 +35,6 @@ def convertirXLSB(nombre_excelXLSB):
 
                 if(fila==1):
                     columnas_fecha = extraerColumnasFechas(row_aux)
-                    # print('columna fecha: ',columnas_fecha)
                 else:
                     conversionFechasFila(columnas_fecha, row_aux)
 
@@ -67,14 +66,10 @@ def convertirReparto(nombre_excelXLSB):
             columnas_fecha = []
             for row in sheet.rows():
                 row_aux = [str(item.v).encode(encoding="utf-8",errors="xmlcharrefreplace") for item in row]
-
-                # row_aux = [None if item.v == None else str(item.v).replace('', ' ').encode(encoding="utf-8",errors="xmlcharrefreplace") for item in row]
-
                 row_aux.pop()
 
                 if(fila==1):
                     columnas_fecha = extraerColumnasFechas(row_aux)
-                    # print(columnas_fecha)
                 else:
                     conversionFechasFila(columnas_fecha, row_aux)
 
