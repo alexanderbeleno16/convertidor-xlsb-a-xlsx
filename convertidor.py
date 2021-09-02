@@ -29,8 +29,6 @@ def convertirXLSB(nombre_excelXLSB):
             fila = 1
             columnas_fecha = []
             for row in sheet.rows():
-                # print(fila)
-                
                 row_aux = [None if item.v == None else str(item.v).replace('', ' ').encode(encoding="utf-8",errors="xmlcharrefreplace") for item in row]
 
                 if(fila==1):
