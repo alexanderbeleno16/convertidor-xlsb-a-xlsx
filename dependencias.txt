@@ -1,0 +1,8 @@
+
+#########   INSTRUCCIONES   #########
+Antes de ejecutar el programa por favor ejecutar la instalación de las librerias:
+
+pip install pyxlsb 
+pip install openpyxl 
+
+
