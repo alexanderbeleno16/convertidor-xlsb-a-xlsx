@@ -29,7 +29,7 @@ def convertirXLSB(nombre_excelXLSB):
             fila = 1
             columnas_fecha = []
             for row in sheet.rows():
-                # print(fila)
+                print(fila)
                 
                 row_aux = [None if item.v == None else str(item.v).replace('', ' ').encode(encoding="utf-8",errors="xmlcharrefreplace") for item in row]
 
@@ -116,6 +116,7 @@ def guardarArchivoNuevo(wbNew, nombre=""):
 try:
     if(sys.argv[1] == ''):
         raise IndexError('Nombre del archivo vacio')
+        
     funcion='N/D'
     file_name = sys.argv[1]
     try:
@@ -125,14 +126,11 @@ try:
         pass
 
     if(funcion.upper() == 'REPARTO'):
-        # print('REPARTO')
         convertirReparto(sys.argv[1])
     elif(funcion.upper() == 'N/D'):
-        # print('generico')
         convertirXLSB(sys.argv[1])
     else:
-        print("")
-        print("")
+        print("\n\n")
         print("##############################################")
         print("Advertencia: Opción digitada no se encuentra")
         print("Por favor, especifique la acción a realizar...")
@@ -141,11 +139,7 @@ try:
         print("Opciones:                                     |")
         print("----------------------------------------------|")
         print("REPARTO                                       |")
-        print("-----------------------------------------------")
-        print("")
-    
-    print('Nombre Archivo: '+file_name,', ','Opción: '+funcion)
-    print("")
+        print("-----------------------------------------------\n")
 except IndexError:
     print('Se requiere el nombre del archivo',IndexError)
 
