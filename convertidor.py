@@ -3,6 +3,7 @@ import openpyxl
 from pyxlsb import open_workbook as open_xlsb
 from pyxlsb import convert_date
 import sys
+import os.path
 
 # ------ PIP ------
 # pip install pyxlsb https://pypi.org/project/pyxlsb/
@@ -20,10 +21,10 @@ def extraerColumnasFechas(Row):
     
     return columnas_fecha
 
-def convertirXLSB():
+def convertirXLSB(nombre_excelXLSB):
     wbNew = openpyxl.Workbook()
     hoja = wbNew.active
-    with open_xlsb('prueba.xlsb') as wb:
+    with open_xlsb(nombre_excelXLSB) as wb:
         with wb.get_sheet(2) as sheet:
             fila = 1
             columnas_fecha = []
@@ -46,7 +47,7 @@ def convertirXLSB():
                 
                 fila+=1
 
-    wbNew.save('Prueba_Nueva8.xlsx')
+    guardarArchivoNuevo(wbNew, nombre_excelXLSB)
 
 def conversionFechasFila(columnafecha=[], row=[]):
     if(len(columnafecha) > 0):
@@ -85,8 +86,19 @@ def convertirReparto(nombre_excelXLSB):
                 
                 fila+=1
 
-    try:            
-        wbNew.save('prueba8.xlsx')
+    guardarArchivoNuevo(wbNew, nombre_excelXLSB)
+
+def guardarArchivoNuevo(wbNew, nombre=""):
+    nombre_guardar = os.path.basename(nombre).replace('.xlsb', '.xlsx')
+    
+    try:
+        if(sys.argv[3]):
+            nombre_guardar = sys.argv[3]
+    except IndexError:
+        pass
+
+    try:
+        wbNew.save(nombre_guardar)            
         print("-----------------------------------------------")
         print("Conversión de xlsb a xlsx exitosa!")
         print("-----------------------------------------------")
@@ -94,11 +106,12 @@ def convertirReparto(nombre_excelXLSB):
         print("")
         print("###############################################################")
         print("Tiene en ejecución un archivo excel con el mismo nombre, cerrar")
-        print("Nombre del archivo en ejecución: prueba8.xlsx")
+        print("Nombre del archivo en ejecución: {}".format(nombre_guardar))
         print("###############################################################")
         print("")
-
-# convertirXLSB()
+    except FileNotFoundError:
+        print("No se pudo acceder al directorio '{}' ".format(os.path.dirname(nombre_guardar)))
+    
 
 try:
     if(sys.argv[1] == ''):
@@ -106,7 +119,7 @@ try:
     funcion='N/D'
     file_name = sys.argv[1]
     try:
-        if(sys.argv[2] != ''):
+        if(sys.argv[2] != '' and sys.argv[2] != '-d'):
             funcion = sys.argv[2]
     except IndexError:
         pass
@@ -116,7 +129,7 @@ try:
         convertirReparto(sys.argv[1])
     elif(funcion.upper() == 'N/D'):
         # print('generico')
-        convertirXLSB()
+        convertirXLSB(sys.argv[1])
     else:
         print("")
         print("")
