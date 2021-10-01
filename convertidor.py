@@ -25,7 +25,7 @@ def convertirXLSB(nombre_excelXLSB):
     wbNew = openpyxl.Workbook()
     hoja = wbNew.active
     with open_xlsb(nombre_excelXLSB) as wb:
-        with wb.get_sheet(2) as sheet:
+        with wb.get_sheet(1) as sheet:
             fila = 1
             columnas_fecha = []
             for row in sheet.rows():
