@@ -2,5 +2,5 @@
 
 ## PARAMETROS
 1. ARCHIVO XLSB
-2. -d OPCION
-3. NOMBRE GUARDAR - (RUTA)
+2. OPCION (-d default)
+3. RUTA GUARDAR - (RUTA, opcional)
