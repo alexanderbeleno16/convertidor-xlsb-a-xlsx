@@ -6,3 +6,7 @@ pip install pyxlsb
 pip install openpyxl 
 
 
+######    PARAMETROS  ######
+1. ARCHIVO XLSB
+2. -d OPCION
+3. NOMBRE GUARDAR - (RUTA)
