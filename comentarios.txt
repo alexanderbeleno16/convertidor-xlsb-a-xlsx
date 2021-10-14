@@ -1,0 +1,89 @@
+{% comment %} def crear_tabla(campos_tabla, BD = 'flaskcrud', tabla = 'pruebaReparto'):
+
+    conx = conexion()
+    with conx.cursor() as cursor:
+        # print(campos_tabla)
+        sql = "CREATE TABLE "+BD+"."+tabla+" (`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ";
+
+        if len(campos_tabla) > 0:        
+            for campo in campos_tabla:
+                # print(campo)
+                if campo == 'ID_PROCESOS':
+                    sql += ", "+campo+" INT(10) "
+                elif campo == 'FECHA_NOTI':
+                    sql += ", "+campo+" date "
+                elif campo == 'NO_BIZAGI' or campo == 'DIGITOS_23':
+                    sql += ", "+campo+" INT(30) "
+                # elif campo == 'DIGITOS_23':
+                #     sql += ", "+campo+" INT(30) "
+                elif campo == 'NOMBRE_DESPACHO_INICIAL' or campo == 'MUNICIPIO' or campo == 'DEPARTAMENTO' or campo == 'TIPO_PROCESO' or campo == 'NOMBRE_DEMANDANTE' or campo == 'CLASIFICACION_TRAMITE' or campo == 'DEMANDADO' or campo == 'TIPO_INFORMATIVO' or campo == 'RELACION_INFORMATIVO' or campo == 'REGIONAL' or campo == 'HECHOS_PROCESO' or campo == 'ACTO_ADMINISTRATIVO_DEMANDADO' or campo == 'CAUSA_PROCESO' or campo == 'MODALIDAD_PRETENSION' or campo == 'PRETENSION_PRINCIPAL' or campo == 'CLASE_PRETENSION' or  campo == 'NOMBRE_CAUSANTE' or campo == 'ENTIDADES_PUBLICA' or campo == 'RIESGO_PROCESAL_FORTALEZA_DEFENSA' or campo == 'RIESGO_PROCESAL_FORTALEZA_PROBATORIA' or campo == 'RIESGO_PROCESAL_RIESGO_PROCESALES' or campo == 'RIESGO_PROCESAL_NIVEL_JURISPRUDENCIA':
+                    # sql += ", "+campo+" VARCHAR(50) "
+                    sql += ", "+campo+" TEXT DEFAULT NULL "
+                # elif campo == 'IDENTIFICACION_DEMANDANTE':
+                #     sql += ", "+campo+" INT(30) "
+                elif campo == 'T_DOC' or  campo == 'IDENTIFICACION_DEMANDANTE' or  campo == 'NUMERO_RESOLUCION' or  campo == 'CUANTIA_ESTIMADA' or campo == 'IDENTIFICACION_CAUSANTE' or campo == 'CANTIDAD_DEMANDANTES' or campo == 'NUMERO_PROCESO_RAMA_JUDICIAL':
+                    sql += ", "+campo+" INT(30) "
+                # elif campo == 'NOMBRE_DEMANDANTE' or campo == 'CLASIFICACION_TRAMITE' or campo == 'DEMANDADO' or campo == 'TIPO_INFORMATIVO' or campo == 'RELACION_INFORMATIVO' or campo == 'REGIONAL' or campo == 'HECHOS_PROCESO' or campo == 'ACTO_ADMINISTRATIVO_DEMANDADO':
+                #     sql += ", "+campo+" VARCHAR(50) "
+                # elif campo == 'NUMERO_RESOLUCION':
+                #     sql += ", "+campo+" INT(30) "
+                # elif campo == 'CAUSA_PROCESO' or campo == 'MODALIDAD_PRETENSION' or campo == 'PRETENSION_PRINCIPAL' or campo == 'CLASE_PRETENSION':
+                #     sql += ", "+campo+" VARCHAR(50) "
+                elif campo == 'FECHA_ADMISION_DEMANDA':
+                    sql += ", "+campo+" date "
+                # elif campo == 'CUANTIA_ESTIMADA' or campo == 'IDENTIFICACION_CAUSANTE':
+                #     sql += ", "+campo+" INT(30) "
+                # elif campo == 'NOMBRE_CAUSANTE':
+                #     sql += ", "+campo+" VARCHAR(30) "
+                # elif campo == 'CANTIDAD_DEMANDANTES':
+                #     sql += ", "+campo+" INT(30) "
+                # elif campo == 'ENTIDADES_PUBLICA':
+                #     sql += ", "+campo+" VARCHAR(30) "
+                # elif campo == 'RIESGO_PROCESAL_FORTALEZA_DEFENSA' or campo == 'RIESGO_PROCESAL_FORTALEZA_PROBATORIA' or campo == 'RIESGO_PROCESAL_RIESGO_PROCESALES' or campo == 'RIESGO_PROCESAL_NIVEL_JURISPRUDENCIA':
+                #     sql += ", "+campo+" VARCHAR(30) "
+                # elif campo == 'NUMERO_PROCESO_RAMA_JUDICIAL':
+                #     sql += ", "+campo+" INT(30) "
+                    
+                # print("\n"+sql)
+        sql += ', PRIMARY KEY (`id`) '
+        sql += ') ENGINE=MYISAM DEFAULT CHARSET=utf8 '
+        print(sql)
+        cursor.execute(sql)
+        conx.commit()
+        # fila = cursor.fetchone() {% endcomment %}
+
+
+
+
+
+{% comment %} 
+    def crear_tabla(self,campos_tabla):
+        conx = self.conexion()
+        with conx.cursor() as cursor:
+            # print(campos_tabla)
+            sql = "CREATE TABLE "+self.BD+"."+self.tabla+" (`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ";
+
+            if len(campos_tabla) > 0:        
+                for campo in campos_tabla:
+                    # print(campo)
+                    if campo == 'FECHA_NOTI':
+                        sql += ", "+campo+" date "
+                    elif campo == 'ID_PROCESOS' or campo == 'NO_BIZAGI' or campo == 'DIGITOS_23' or campo == 'NOMBRE_DESPACHO_INICIAL' or campo == 'MUNICIPIO' or campo == 'DEPARTAMENTO' or campo == 'TIPO_PROCESO' or campo == 'NOMBRE_DEMANDANTE' or campo == 'CLASIFICACION_TRAMITE' or campo == 'DEMANDADO' or campo == 'TIPO_INFORMATIVO' or campo == 'RELACION_INFORMATIVO' or campo == 'REGIONAL' or campo == 'HECHOS_PROCESO' or campo == 'ACTO_ADMINISTRATIVO_DEMANDADO' or campo == 'CAUSA_PROCESO' or campo == 'MODALIDAD_PRETENSION' or campo == 'PRETENSION_PRINCIPAL' or campo == 'CLASE_PRETENSION' or  campo == 'NOMBRE_CAUSANTE' or campo == 'ENTIDADES_PUBLICA' or campo == 'RIESGO_PROCESAL_FORTALEZA_DEFENSA' or campo == 'RIESGO_PROCESAL_FORTALEZA_PROBATORIA' or campo == 'RIESGO_PROCESAL_RIESGO_PROCESALES' or campo == 'RIESGO_PROCESAL_NIVEL_JURISPRUDENCIA' or campo == 'INSTANCIA_ACTUAL' or campo == 'DESPACHOACTUAL' or campo == 'ETAPA_ACTUAL_PROCESO' or campo == 'ULTIMA_SITUACION_PROCESAL' or campo == 'ULTIMA_ACTUACION_SURTIDA_PROCESO' or campo == 'SENTIDO_FALLO_1INSTANCIA' or campo == 'SENTIDO_FALLO_2INSTANCIA' or campo == 'COSTAS' or campo == 'VALOR_AGENCIAS_DERECHO' or campo == 'RECURSO_EXTRAORDINARIO' or campo == 'FORMAS_TERMINACION_ANORMAL_PROCESO' or campo == 'ESTADO_PROCESO' or campo == 'PROCESO_EMBARGO' or campo == 'SENTENCIA_ENTREGADA_CUMPLIMIENTO' or campo == 'VALOR_SENTENCIA' or campo == 'VALOR_INTERESES_MORATORIOS' or campo == 'VALOR_INDEXACION' or campo == 'OBSERVACIONES' or campo == 'ASIGNADOA' or campo == 'FIRMA' or campo == 'ESTADO_EKOGUI' or campo == 'RIESGO_1PROBABLE_2EVENTUAL_3REMOTO' or campo == 'estado_sistema' or campo == 'REPARTO' or campo == 'TIEMPO_ESTIMADO_PROCESO' or campo == 'T_DOC' or  campo == 'IDENTIFICACION_DEMANDANTE' or  campo == 'NUMERO_RESOLUCION' or  campo == 'CUANTIA_ESTIMADA' or campo == 'IDENTIFICACION_CAUSANTE' or campo == 'CANTIDAD_DEMANDANTES' or campo == 'NUMERO_PROCESO_RAMA_JUDICIAL' or campo == 'NUMERODESPACHO' or campo == 'GASTOS_PROCESALES' or campo == 'VALOR_ACUERDO' or campo == 'BIZAGI_RI_FICHA' or campo == 'ESTADO_FICHA' or campo == 'ID_EKOGUI' or campo == 'TARJETA_PROFESIONAL' or campo == 'COORDINADOR' or campo == 'IDENTIFICACION':
+                        sql += ", "+campo+" TEXT DEFAULT NULL "
+                    elif campo == 'NOMBRE APODERADO CONTRAPARTE' or campo == 'DOCUMENTO ABOGADO CONTRA PARTE' or campo == 'BZ ':
+                        sql += ", "+str(campo).replace(' ', '_')+" TEXT DEFAULT NULL "
+                    elif campo == 'FECHA_ADMISION_DEMANDA' or campo == 'FECHA_ÚLTI' or campo == 'FECHA_FALLO_1INSTANCIA' or campo == 'FECHA_FALLO_2INSTANCIA' or campo == 'FECHA_EJECUTORIA_SENTENCIA' or campo == 'fecha_audiencia' or campo == 'FECHA_ENVIO_REPARTO':
+                        sql += ", "+campo+" date "
+                    else:
+                        sql += ", "+campo+" VARCHAR(255) DEFAULT NULL "
+                        # sql += ", "+campo+" date "
+                    
+                        
+                    # print("\n"+sql)
+            sql += ', PRIMARY KEY (`id`) '
+            sql += ') ENGINE=MYISAM DEFAULT CHARSET=utf8 '
+            cursor.execute(sql)
+            conx.commit()
+            print("La tabla '"+self.tabla+"' fue creada con exito!")
+        self.existe_tabla()
+ {% endcomment %}
